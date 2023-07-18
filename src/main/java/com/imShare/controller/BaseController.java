@@ -10,4 +10,7 @@ public class BaseController {
     public String test2(){
         return "test";
     }
+    public String test23(){
+        return "test";
+    }
 }
