@@ -8,7 +8,9 @@ public class BaseController {
         return "test";
     }
 
+
     public String test2(){
         return "test";
+
     }
 }
