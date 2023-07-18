@@ -7,4 +7,7 @@ public class BaseController {
     public String test(){
         return "test";
     }
+    public String test2(){
+        return "test";
+    }
 }
