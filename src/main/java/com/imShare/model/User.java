@@ -25,6 +25,6 @@ public class User {
     private Profile profile;
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
-    @ManyToMany(mappedBy = "users")
-    private List<Save> saves;
+    @OneToOne(mappedBy = "user")
+    private Save save;
 }
