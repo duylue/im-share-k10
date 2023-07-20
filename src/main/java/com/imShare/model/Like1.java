@@ -6,22 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Like1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int likeId;
     private int userId;
-    private String userName;
-    private String password;
-    @ManyToMany(mappedBy = "users")
-    private List<Role> roles;
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

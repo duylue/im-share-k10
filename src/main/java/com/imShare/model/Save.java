@@ -13,14 +13,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Save {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleId;
-    private String name;
+    private int saveId;
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name = "user_role",
-            joinColumns={@JoinColumn(name="role_id", referencedColumnName="roleId")},
-            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")})
-    private List<User> users;
+    @JoinTable(name = "post_save",
+            joinColumns={@JoinColumn(name="save_id", referencedColumnName="saveId")},
+            inverseJoinColumns={@JoinColumn(name="post_id", referencedColumnName="postId")})
+    private List<Post> posts;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
