@@ -21,10 +21,7 @@ public class User {
     private String password;
     @ManyToMany(mappedBy = "users")
     private List<Role> roles;
-    @OneToOne(mappedBy = "user")
-    private Profile profile;
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
-    @OneToOne(mappedBy = "user")
-    private Save save;
+
 }

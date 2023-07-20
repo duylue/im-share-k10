@@ -22,10 +22,8 @@ public class Save {
             joinColumns={@JoinColumn(name="save_id", referencedColumnName="saveId")},
             inverseJoinColumns={@JoinColumn(name="post_id", referencedColumnName="postId")})
     private List<Post> posts;
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name = "user_save",
-            joinColumns={@JoinColumn(name="save_id", referencedColumnName="saveId")},
-            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")})
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
 }

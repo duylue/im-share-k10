@@ -16,10 +16,7 @@ public class Like1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int likeId;
     private int userId;
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "post_like",
-            joinColumns={@JoinColumn(name="like_id", referencedColumnName="likeId")},
-            inverseJoinColumns={@JoinColumn(name="post_id", referencedColumnName="postId")})
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 }
