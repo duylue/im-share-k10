@@ -31,7 +31,7 @@ public class Post {
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
     private List<Comment> comments;
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<Like1> likes;
+    private List<UserLike> likes;
     @ManyToMany(mappedBy = "posts")
     private List<Save> saves;
     @ManyToOne
