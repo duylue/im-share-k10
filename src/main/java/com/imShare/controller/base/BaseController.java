@@ -1,4 +1,4 @@
-package com.imShare.controller;
+package com.imShare.controller.base;
 
 import org.springframework.stereotype.Controller;
 
