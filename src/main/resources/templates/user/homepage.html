@@ -313,17 +313,20 @@
                         </div>
 
                     </div>
-                    <div>
+
+                    <div type="button" data-bs-toggle="modal" data-bs-target="#post">
                         <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
                              class="rounded-circle" alt="Cinque Terre" width="470" height="585">
                     </div>
+
                     <div style="height: 50px;" class="d-flex justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
                             <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
                                 <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
                                     class="fa-regular fa-heart fa-lg"></i>
                             </button>
-                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
+                                    data-bs-toggle="modal" data-bs-target="#post">
                                 <i class="fa-regular fa-comment fa-lg"></i>
                             </button>
                         </div>
@@ -350,7 +353,7 @@
                             <div class="row">
                                 <div class="col-11">
                                     <label for="comment" class="form-label" hidden></label>
-                                    <input type="text" class="form-control" id="comment"
+                                    <input type="text" class="form-control"
                                            placeholder="Add a comment..." name="comment">
                                 </div>
                                 <div class="col-1">
@@ -365,8 +368,6 @@
 
                 </div>
             </div>
-
-
 
 
         </div>
@@ -468,16 +469,10 @@
             </div>
 
 
-
-
-
-
-
-
         </div>
 
 
-        <!-- The Modal -->
+        <!-- The Modal Create -->
         <div class="modal fade" id="createPost">
             <div class="modal-dialog">
                 <div class="modal-content width-50 height-50">
@@ -493,7 +488,7 @@
                         <form id="uploadForm" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="uploadfile" class="form-label">Choose File From Computer</label>
-                                <input type="file" id="uploadfile" class="form-control" name="fileInput"
+                                <input type="file" id="uploadfile" class="form-control" name="files"
                                        multiple="multiple">
                             </div>
                             <button type="submit" class="btn btn-primary">Upload</button>
@@ -503,13 +498,16 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#editPost">Tiếp tục</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#editPost">Tiếp tục
+                        </button>
                     </div>
 
                 </div>
             </div>
         </div>
-        <!-- The Modal -->
+
+        <!-- The Modal edit -->
         <div class="modal fade" id="editPost">
             <div class="modal-dialog">
                 <div class="modal-content width-50 height-50">
@@ -538,7 +536,8 @@
 
                             <div class="mb-3">
                                 <label for="caption" class="form-label" hidden></label>
-                                <textarea class="form-control" name="" id="caption" rows="4" placeholder="Write a caption"></textarea>
+                                <textarea class="form-control" name="" id="caption" rows="4"
+                                          placeholder="Write a caption"></textarea>
                             </div>
                         </div>
                     </div>
@@ -551,24 +550,129 @@
             </div>
         </div>
 
-
-
-
     </div>
 
+    <!-- The Modal Post -->
+    <div class="modal fade min-vh-100 min-vw-100 bg-dark" id="post">
+        <div class="modal-dialog min-vh-100" style="min-height: 90vh; min-width: 80vw;">
+            <div class="modal-content" style="min-height: 90vh; min-width: 80vw;">
+
+                <!-- Modal body -->
+                <div class="row modal-body">
+                    <div class="col-6 d-flex align-items-center justify-content-center viewcontent">
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="img-fluid">
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+
+                        <div style="height: 40px;" class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div>
+                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+                                </div>
+
+                                <div>
+                                    <div><span class="h6">Phantu202</span></div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="dropdown">
+                                    <button type="submit"
+                                            class="btn btn-light btn-block text-center text-lg-start py-0"
+                                            data-bs-toggle="dropdown">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Report</a></li>
+                                        <li><a class="dropdown-item" href="#">Unfollow</a></li>
+                                        <li><a class="dropdown-item" href="#">Add to favvorites</a></li>
+                                        <li><a class="dropdown-item" href="#">Go to post</a></li>
+
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-column justify-content-start border-top" style="min-height: 60vh;">
+                            <div class="row">
+                                <div class="col-1">
+                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">
+
+                                </div>
+                                <div class="col-11 d-flex flex-column">
+                                    <div class="p-0 m-0">
+                                        <span class="h6">Phantu202</span>
+                                        <p>yall sound so stupid nd fake “woke” talkin about the vaccine, grown ass
+                                            ppl shi is ridiculous</p>
+                                    </div>
+                                    <div class="p-0 m-0">20/10/2023</div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-between border-top" style="min-height: 10vh;">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <button type="button"
+                                        class="btn btn-light btn-block text-center text-lg-start py-3">
+                                    <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
+                                        class="fa-regular fa-heart fa-lg"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-light btn-block text-center text-lg-start py-3">
+                                    <i class="fa-regular fa-comment fa-lg"></i>
+                                </button>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <button type="button"
+                                        class="btn btn-light btn-block text-center text-lg-start py-3">
+                                    <i class="fa-solid fa-bookmark fa-lg"></i><i
+                                        class="fa-regular fa-bookmark fa-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="h6 px-2">8 likes</p>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 10vh;">
+                            <div class="w-100">
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <label for="comment" class="form-label" hidden></label>
+                                            <input type="text" class="form-control" id="comment"
+                                                   placeholder="Add a comment..." name="comment">
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="submit" class="btn btn-primary">Post</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
 </div>
 
 
-
 </div>
-
-
-
-
-
-
-
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -621,6 +725,7 @@
         }
         view.append(str)
     }
+
     function refreshPage() {
         $('#uploadForm').show()
         $('#viewcontent').empty()
