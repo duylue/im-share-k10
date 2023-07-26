@@ -12,7 +12,7 @@
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- include summernote css/js -->
@@ -22,485 +22,613 @@
 </head>
 
 <body>
-    <div class="container-fluid row bg-light">
-        <!-- SideBar -->
+<div class="container-fluid row bg-light">
+    <!-- SideBar -->
 
-        <div class="col-2 min-vh-100"></div>
-        <div class="col-2 d-flex flex-column min-vh-100 border-end py-2 fixed-top justify-content-between">
+    <div class="col-2 min-vh-100"></div>
+    <div class="col-2 d-flex flex-column min-vh-100 border-end py-2 fixed-top justify-content-between">
+        <div>
+            <div class="py-4 px-2 text-center text-lg-start">
+                <i class="fa-solid fa-image d-inline d-lg-none"></i>
+                <h2 class="d-none d-lg-inline"><i>imShare</i></h2>
+            </div>
             <div>
-                <div class="py-4 px-2 text-center text-lg-start">
-                    <i class="fa-solid fa-image d-inline d-lg-none"></i>
-                    <h2 class="d-none d-lg-inline"><i>imShare</i></h2>
-                </div>
-                <div>
-                    <div class="btn-group-vertical w-100">
-                        <button type="button" class="btn btn-light  btn-block text-center text-lg-start py-3">
-                            <i class="fa-solid fa-house"></i><span
-                                class="h4 ms-4 d-none d-lg-inline"><small>Home</small></span>
-                        </button>
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            <i class="fa-solid fa-magnifying-glass fa-lg"></i><span
-                                class="h4 ms-4 d-none d-lg-inline"><small>Search</small></span>
-                        </button>
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            <i class="fa-regular fa-square-plus fa-lg"></i><span
-                                class="h4 ms-4 d-none d-lg-inline"><small>Create</small></span>
-                        </button>
-                    </div>
+                <div class="btn-group-vertical w-100">
+                    <button type="button" class="btn btn-light  btn-block text-center text-lg-start py-3">
+                        <i class="fa-solid fa-house"></i><span
+                            class="h4 ms-4 d-none d-lg-inline"><small>Home</small></span>
+                    </button>
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i><span
+                            class="h4 ms-4 d-none d-lg-inline"><small>Search</small></span>
+                    </button>
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
+                            onclick="refreshPage()" data-bs-toggle="modal" data-bs-target="#createPost">
+                        <i class="fa-regular fa-square-plus fa-lg"></i><span
+                            class="h4 ms-4 d-none d-lg-inline"><small>Create</small></span>
+                    </button>
                 </div>
             </div>
-            <div class="dropup w-100">
-                <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
+        </div>
+        <div class="dropup w-100">
+            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
                     data-bs-toggle="dropdown">
-                    <i class="fa-solid fa-bars pe-2"></i><span
-                        class="h4 ms-4 d-none d-lg-inline px-1"><small>More</small></span><i
-                        class="fa-solid fa-caret-up"></i>
+                <i class="fa-solid fa-bars pe-2"></i><span
+                    class="h4 ms-4 d-none d-lg-inline px-1"><small>More</small></span><i
+                    class="fa-solid fa-caret-up"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Setting</a></li>
+                <li><a class="dropdown-item" href="#">Save</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                    </hr>
+                </li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+        </div>
+
+
+    </div>
+    <!-- Content -->
+    <div class="col-10 py-2 row">
+        <div class="col-9 pt-4">
+
+            <!-- List user folower -->
+            <div id="demo" class="carousel slide px-5 pb-5" data-bs-ride="carousel">
+
+                <!-- Indicators/dots -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                </div>
+                <!-- The slideshow/carousel -->
+
+                <div class="carousel-inner px-5 text-center" style="height: 85px; width: auto;">
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-around">
+                            <div class="d-flex flex-column">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-around">
+                            <div class="d-flex flex-column">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-around">
+                            <div class="d-flex flex-column">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                <p
+                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    usernamejkhkhkhkk</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls/icons -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="rounded-circle bg-dark"><i class="fa-solid fa-chevron-left"></i></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Setting</a></li>
-                    <li><a class="dropdown-item" href="#">Save</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                        </hr>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
-                </ul>
-            </div>
-
-
-        </div>
-        <!-- Content -->
-        <div class="col-10 py-2 row">
-            <div class="col-9 pt-4">
-
-                <!-- List user folower -->
-                <div id="demo" class="carousel slide px-5 pb-5" data-bs-ride="carousel">
-
-                    <!-- Indicators/dots -->
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                    </div>
-                    <!-- The slideshow/carousel -->
-
-                    <div class="carousel-inner px-5 text-center" style="height: 85px; width: auto;">
-                        <div class="carousel-item active">
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex flex-column">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                        <div class="carousel-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex flex-column">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex flex-column">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p style="width: 74px" class="text-truncate">usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-                                <div class="d-flex flex-column text-center">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                                    <p
-                                        style="width: 74px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                        usernamejkhkhkhkk</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                        <span class="rounded-circle bg-dark"><i class="fa-solid fa-chevron-left"></i></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                        <span class="rounded-circle bg-dark"><i class="fa-solid fa-chevron-right"></i></span>
-                    </button>
-
-
-                </div>
-
-                <!-- List post folower -->
-                <div class="d-flex align-items-center justify-content-center px-2">
-                    <div class="border-bottom" style="height: auto; width: 470px;">
-                        <div style="height: 58px;" class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <div>
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                        class="rounded-circle" alt="Cinque Terre" width="42" height="42">
-                                </div>
-
-                                <div>
-                                    <div><span class="h5">Username</span></div>
-                                </div>
-                                <div class="d-flex justify-content-center"><span><small><i> - 1d</i></small></span></p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <div class="dropdown">
-                                    <button type="submit" class="btn btn-light btn-block text-center text-lg-start py-3" data-bs-toggle="dropdown">
-                                        <i class="fa-solid fa-ellipsis"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Report</a></li>
-                                        <li><a class="dropdown-item" href="#">Unfollow</a></li>
-                                        <li><a class="dropdown-item" href="#">Add to favvorites</a></li>
-                                        <li><a class="dropdown-item" href="#">Go to post</a></li>
-                                        
-                                      </ul>
-                                </div>
-                                
-
-                            </div>
-
-                        </div>
-                        <div>
-                            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                class="rounded-circle" alt="Cinque Terre" width="470" height="585">
-                        </div>
-                        <div style="height: 50px;" class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
-                                        class="fa-regular fa-heart fa-lg"></i>
-                                </button>
-                                <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-regular fa-comment fa-lg"></i>
-                                </button>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-solid fa-bookmark fa-lg"></i><i
-                                        class="fa-regular fa-bookmark fa-lg"></i>
-                                </button>
-                            </div>
-
-
-                        </div>
-                        <div>
-                            <p class="h6 px-2">8 likes</p>
-                        </div>
-                        <div>
-                            <div class="px-2"><span class="h5">Username</span></div>
-                        </div>
-                        <div>
-                            <p class="px-2">caption fjldfjldkfd</p>
-                        </div>
-                        <div class="mb-3">
-                            <form action="">
-                                <div class="row">
-                                    <div class="col-11">
-                                        <label for="comment" class="form-label" hidden></label>
-                                        <input type="text" class="form-control" id="comment"
-                                            placeholder="Add a comment..." name="comment">
-                                    </div>
-                                    <div class="col-1">
-                                        <button type="submit" class="btn btn-primary">Post</button>
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-                
+                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="rounded-circle bg-dark"><i class="fa-solid fa-chevron-right"></i></span>
+                </button>
 
 
             </div>
-            <!-- Sidebar left -->
-            <div class="col-3 pt-4">
-                <div class="d-flex justify-content-between mb-5">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                        <div>
-                            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+
+            <!-- List post folower -->
+            <div class="d-flex align-items-center justify-content-center px-2">
+                <div class="border-bottom" style="height: auto; width: 470px;">
+                    <div style="height: 58px;" class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div>
+                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                     class="rounded-circle" alt="Cinque Terre" width="42" height="42">
+                            </div>
+
+                            <div>
+                                <div><span class="h5">Username</span></div>
+                            </div>
+                            <div class="d-flex justify-content-center"><span><small><i> - 1d</i></small></span></p>
+                            </div>
                         </div>
-    
-                        <div>
-                            <div><span class="h5">phantu202</span></div>
-                            <div><span class="h6">Phan Anh Tú</span></div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="dropdown">
+                                <button type="submit" class="btn btn-light btn-block text-center text-lg-start py-3"
+                                        data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Report</a></li>
+                                    <li><a class="dropdown-item" href="#">Unfollow</a></li>
+                                    <li><a class="dropdown-item" href="#">Add to favvorites</a></li>
+                                    <li><a class="dropdown-item" href="#">Go to post</a></li>
+
+                                </ul>
+                            </div>
+
+
                         </div>
-    
+
                     </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            <i class="fa-solid fa-ellipsis"></i>
-                        </button>
-    
+                    <div>
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="rounded-circle" alt="Cinque Terre" width="470" height="585">
                     </div>
+                    <div style="height: 50px;" class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                                <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
+                                    class="fa-regular fa-heart fa-lg"></i>
+                            </button>
+                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                                <i class="fa-regular fa-comment fa-lg"></i>
+                            </button>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                                <i class="fa-solid fa-bookmark fa-lg"></i><i
+                                    class="fa-regular fa-bookmark fa-lg"></i>
+                            </button>
+                        </div>
+
+
+                    </div>
+                    <div>
+                        <p class="h6 px-2">8 likes</p>
+                    </div>
+                    <div>
+                        <div class="px-2"><span class="h5">Username</span></div>
+                    </div>
+                    <div>
+                        <p class="px-2">caption fjldfjldkfd</p>
+                    </div>
+                    <div class="mb-3">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-11">
+                                    <label for="comment" class="form-label" hidden></label>
+                                    <input type="text" class="form-control" id="comment"
+                                           placeholder="Add a comment..." name="comment">
+                                </div>
+                                <div class="col-1">
+                                    <button type="submit" class="btn btn-primary">Post</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
                 </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                        <div>
-                            <span>Suggested for you</span>
-                        </div>
-    
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            See all
-                        </button>
-    
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                        <div>
-                            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                        </div>
-    
-                        <div>
-                            <div><span class="h5">phantu202</span></div>
-                            <div><span class="h6">Phan Anh Tú</span></div>
-                        </div>
-    
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            Follow
-                        </button>
-    
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                        <div>
-                            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                        </div>
-    
-                        <div>
-                            <div><span class="h5">phantu202</span></div>
-                            <div><span class="h6">Phan Anh Tú</span></div>
-                        </div>
-    
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            Follow
-                        </button>
-    
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                        <div>
-                            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                class="rounded-circle" alt="Cinque Terre" width="56" height="56">
-                        </div>
-    
-                        <div>
-                            <div><span class="h5">phantu202</span></div>
-                            <div><span class="h6">Phan Anh Tú</span></div>
-                        </div>
-    
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                            Follow
-                        </button>
-    
-                    </div>
-                </div>
-                
-
-                
-
-
-
-
-
             </div>
 
 
 
 
         </div>
+        <!-- Sidebar left -->
+        <div class="col-3 pt-4">
+            <div class="d-flex justify-content-between mb-5">
+                <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                    <div>
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                    </div>
+
+                    <div>
+                        <div><span class="h5">phantu202</span></div>
+                        <div><span class="h6">Phan Anh Tú</span></div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                    <div>
+                        <span>Suggested for you</span>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        See all
+                    </button>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                    <div>
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                    </div>
+
+                    <div>
+                        <div><span class="h5">phantu202</span></div>
+                        <div><span class="h6">Phan Anh Tú</span></div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        Follow
+                    </button>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                    <div>
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                    </div>
+
+                    <div>
+                        <div><span class="h5">phantu202</span></div>
+                        <div><span class="h6">Phan Anh Tú</span></div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        Follow
+                    </button>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                    <div>
+                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                             class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                    </div>
+
+                    <div>
+                        <div><span class="h5">phantu202</span></div>
+                        <div><span class="h6">Phan Anh Tú</span></div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        Follow
+                    </button>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+        <!-- The Modal -->
+        <div class="modal fade" id="createPost">
+            <div class="modal-dialog">
+                <div class="modal-content width-50 height-50">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create new post</h4>
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="uploadfile" class="form-label">Choose File From Computer</label>
+                                <input type="file" id="uploadfile" class="form-control" name="fileInput"
+                                       multiple="multiple">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                        <div class="viewcontent"></div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#editPost">Tiếp tục</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal fade" id="editPost">
+            <div class="modal-dialog">
+                <div class="modal-content width-50 height-50">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit post</h4>
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="row modal-body">
+                        <div class="col-6 d-flex align-items-center justify-content-center viewcontent">
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+
+                            <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                                <div>
+                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                         class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                </div>
+
+                                <div><span class="h5">phantu202</span></div>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="caption" class="form-label" hidden></label>
+                                <textarea class="form-control" name="" id="caption" rows="4" placeholder="Write a caption"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đăng bài</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
 
     </div>
 
-
-
-    </div>
-
+</div>
 
 
 
-
+</div>
 
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-        </script>
+</script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-        </script>
+</script>
+<script>
+    const API_URL = 'http://localhost:8080/api'
+    $(document).ready(function () {
+        // Handle form submission
+        $('#uploadForm').submit(function (event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+            formData.append('attachments', this[0].files[0])
+            $.ajax({
+                type: 'POST',
+                url: API_URL + '/storages/attachments', // Replace with your API endpoint
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert('File(s) uploaded successfully!');
+                    let data = response.data
+                    let img = data[0].url
+                    $('#uploadForm').hide()
+                    initViewContent(img)
+
+                },
+                error: function (error) {
+                    alert('Error uploading file(s). Please try again later.');
+                    console.error(error);
+                }
+            });
+
+        });
+    });
+
+    function initViewContent(img) {
+        let view = $('.viewcontent')
+        view.empty()
+        let str = ''
+        if (img !== '') {
+            str = '<img src="' + img + '" class="img-fluid">' +
+                '<input type="text" value="' + img + '" hidden>'
+
+        }
+        view.append(str)
+    }
+    function refreshPage() {
+        $('#uploadForm').show()
+        $('#viewcontent').empty()
+        $('#uploadfile').val('')
+    }
+
+
+</script>
 
 </body>
 

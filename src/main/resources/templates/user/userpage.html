@@ -42,7 +42,8 @@
                             <i class="fa-solid fa-magnifying-glass fa-lg"></i><span
                                 class="h4 ms-4 d-none d-lg-inline"><small>Search</small></span>
                         </button>
-                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
+                        <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
+                                onclick="refreshPage()" data-bs-toggle="modal" data-bs-target="#createPost">
                             <i class="fa-regular fa-square-plus fa-lg"></i><span
                                 class="h4 ms-4 d-none d-lg-inline"><small>Create</small></span>
                         </button>
@@ -135,12 +136,136 @@
 
         </div>
 
+        <!-- The Modal Create -->
+        <div class="modal fade" id="createPost">
+            <div class="modal-dialog">
+                <div class="modal-content width-50 height-50">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create new post</h4>
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body d-flex align-items-center justify-content-center">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="fileInput" class="form-label">Choose File From Computer</label>
+                                <input type="file" id="uploadfile" class="form-control" name="files"
+                                       multiple="multiple">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                        <div class="viewcontent"></div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#editPost">Tiếp tục</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- The Modal edit -->
+        <div class="modal fade" id="editPost">
+            <div class="modal-dialog">
+                <div class="modal-content width-50 height-50">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit post</h4>
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="row modal-body">
+                        <div class="col-6 d-flex align-items-center justify-content-center viewcontent">
+                        </div>
+                        <div class="col-6 d-flex flex-column">
+
+                            <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                                <div>
+                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
+                                         class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                                </div>
+
+                                <div><span class="h5">phantu202</span></div>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label" hidden></label>
+                                <textarea class="form-control" name="" id="caption" rows="4" placeholder="Write a caption"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đăng bài</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
 
     </div>
+    <script>
+        const API_URL = 'http://localhost:8080/api'
+        $(document).ready(function () {
+            // Handle form submission
+            $('#uploadForm').submit(function (event) {
+                event.preventDefault();
 
+                var formData = new FormData();
+                formData.append('attachments', this[0].files[0])
+                $.ajax({
+                    type: 'POST',
+                    url: API_URL + '/storages/attachments', // Replace with your API endpoint
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        alert('File(s) uploaded successfully!');
+                        let data = response.data
+                        let img = data[0].url
+                        $('#uploadForm').hide()
+                        initViewContent(img)
+
+                    },
+                    error: function (error) {
+                        alert('Error uploading file(s). Please try again later.');
+                        console.error(error);
+                    }
+                });
+
+            });
+        });
+
+        function initViewContent(img) {
+            let view = $('.viewcontent')
+            view.empty()
+            let str = ''
+            if (img !== '') {
+                str = '<img src="' + img + '" class="img-fluid">' +
+                    '<input type="text" value="' + img + '" hidden>'
+
+            }
+            view.append(str)
+        }
+        function refreshPage() {
+            $('#uploadForm').show()
+            $('#viewcontent').empty()
+            $('#uploadfile').val('')
+        }
+
+
+    </script>
 
 
 
