@@ -22,5 +22,8 @@ public class Report {
             joinColumns={@JoinColumn(name="report_id", referencedColumnName="reportId")},
             inverseJoinColumns={@JoinColumn(name="post_id", referencedColumnName="postId")})
     private List<Post> posts;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
