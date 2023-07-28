@@ -1,4 +1,4 @@
-package com.imShare.controller;
+package com.imShare.controller.api;
 
 import com.imShare.model.Post;
 import com.imShare.service.PostService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/post")
 public class PostController {
     @Autowired
     private PostService postService;

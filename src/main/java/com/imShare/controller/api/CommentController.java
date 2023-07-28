@@ -1,4 +1,4 @@
-package com.imShare.controller;
+package com.imShare.controller.api;
 
 import com.imShare.model.Comment;
 import com.imShare.service.CommentService;
@@ -7,12 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/api/comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/find-comment")
+    @GetMapping("/find-by-id")
     public ResponseEntity findComment(@RequestParam("postId") int postId) {
         return commentService.findComment(postId);
     }
