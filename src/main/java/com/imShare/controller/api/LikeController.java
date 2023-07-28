@@ -12,15 +12,15 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
     @PostMapping("/create")
-    public ResponseEntity createLike(@RequestBody UserLike userLike){
+    public ResponseEntity<?> createLike(@RequestBody UserLike userLike){
         return likeService.createLike(userLike);
     }
     @GetMapping("/delete")
-    public ResponseEntity deleteLike(@RequestParam("likeId") int likeId){
+    public ResponseEntity<?> deleteLike(@RequestParam("likeId") int likeId){
         return likeService.deleteLike(likeId);
     }
     @GetMapping("/count-like")
-    public ResponseEntity countLike(){
+    public ResponseEntity<?> countLike(){
         return likeService.countLikes();
     }
 

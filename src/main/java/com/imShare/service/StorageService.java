@@ -42,8 +42,7 @@ public class StorageService extends BaseResponse {
         List<FileMetadata> attachments = files.stream()
                 .map(file -> {
                     String fileKey = "uploadFile-" + file.getOriginalFilename();
-                    FileMetadata metadata = put(bucketName, fileKey, file, true);
-                    return metadata;
+                    return put(bucketName, fileKey, file, true);
                 })
                 .collect(Collectors.toList());
         return getResponseEntity(attachments);

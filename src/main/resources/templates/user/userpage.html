@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>User Page</title>
@@ -22,6 +23,7 @@
 </head>
 
 <body>
+    <input name="uviewid" th:value="${uviewid}" hidden>
     <div class="container-fluid row bg-light">
         <!-- SideBar -->
 

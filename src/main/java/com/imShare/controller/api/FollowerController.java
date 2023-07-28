@@ -12,11 +12,11 @@ public class FollowerController {
     @Autowired
     private FollowerService followerService;
     @PostMapping("/create")
-    public ResponseEntity createFollower(@RequestBody Follower follower){
+    public ResponseEntity<?> createFollower(@RequestBody Follower follower){
         return followerService.createFollower(follower);
     }
     @GetMapping("/delete")
-    public ResponseEntity deletefollower(@RequestParam("fid") int fid){
+    public ResponseEntity<?> deletefollower(@RequestParam("fid") int fid){
         return followerService.deleteFollower(fid);
     }
 }

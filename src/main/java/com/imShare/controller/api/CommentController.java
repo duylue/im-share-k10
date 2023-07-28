@@ -13,17 +13,17 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/find-by-id")
-    public ResponseEntity findComment(@RequestParam("postId") int postId) {
+    public ResponseEntity<?> findComment(@RequestParam("postId") int postId) {
         return commentService.findComment(postId);
     }
 
     @PostMapping("/save")
-    public ResponseEntity saveComment(@RequestBody Comment comment) {
+    public ResponseEntity<?> saveComment(@RequestBody Comment comment) {
         return commentService.saveComment(comment);
     }
 
     @GetMapping("/delete")
-    public ResponseEntity deleteComment(int cid) {
+    public ResponseEntity<?> deleteComment(int cid) {
         return commentService.deleteComment(cid);
     }
 }

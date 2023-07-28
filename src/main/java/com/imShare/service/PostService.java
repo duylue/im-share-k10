@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-    ResponseEntity findAll();
+    ResponseEntity<?> findAll();
 
-    ResponseEntity savePost(Post post);
+    ResponseEntity<?> savePost(Post post);
 
-    ResponseEntity deletePost(int postId);
+    ResponseEntity<?> deletePost(int postId);
 
-    ResponseEntity listPostUserName(String userName, int page, int size);
+    ResponseEntity<?> listPostUserName(String userName, int page, int size);
 
-    ResponseEntity listPostSave(int saveId, int page, int size);
+    ResponseEntity<?> listPostSave(int saveId, int page, int size);
 
     ResponseEntity listPostFollower(int fid, int page, int size);
 }

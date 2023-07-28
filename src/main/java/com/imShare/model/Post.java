@@ -37,7 +37,6 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToMany(mappedBy = "posts")
-    private List<Report> reports;
+
 
 }
