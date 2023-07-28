@@ -25,5 +25,6 @@ public class User {
     private List<Post> posts;
     @ManyToMany(mappedBy = "users")
     private List<Follower> followers;
-
+    @OneToMany(mappedBy = "user")
+    private List<UserLike> userLikes;
 }
