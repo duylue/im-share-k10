@@ -1,10 +1,11 @@
 package com.imShare.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,5 +18,4 @@ public class Report {
     private int reportId;
     private int postId;
     private int userId;
-
 }
