@@ -27,11 +27,11 @@ public class PostController {
         return postService.deletePost(postId);
     }
 
-    @GetMapping("/list-post-userName")
-    public ResponseEntity<?> listPostUserName(@RequestParam("userName") String userName,
+    @GetMapping("/list-post-userId")
+    public ResponseEntity<?> listPostUserId(@RequestParam("userId") int userId,
                                            @RequestParam("page") int page,
                                            @RequestParam("size") int size) {
-        return postService.listPostUserName(userName, page, size);
+        return postService.listPostUserId(userId, page, size);
     }
 
     @GetMapping("/list-post-save")

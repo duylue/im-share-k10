@@ -16,18 +16,18 @@ public interface PostPagingRepository extends PagingAndSortingRepository<Post, I
             " post p LEFT JOIN post_save s " +
             "ON p.post_id = s.post_id where" +
             " p.save_id= :saveId", nativeQuery = true)
-    List<Map<String, Post>> findBySave(@Param("saveId") int saveId, Pageable pageable);
+    Page<Map<String, Post>> findBySave(@Param("saveId") int saveId, Pageable pageable);
 
     @Query(value = "SELECT p.* " +
             "FROM post p " +
-            "where p.userName= :userName", nativeQuery = true)
-    List<Map<String, Post>> findByUserName(@Param("userName") String userName, Pageable pageable);
+            "where p.user_id= :userId", nativeQuery = true)
+    Page<Map<String, Post>> findByUserId(@Param("userId") int userId, Pageable pageable);
 
     @Query(value = "SELECT p.* " +
             "FROM post p left join" +
             " follower f ON " +
             "p.user_id = f.user_id " +
             "where fid = :fid", nativeQuery = true)
-    List<Map<String, Post>> findByFollower(@Param("fid") int fid, Pageable pageable);
+    Page<Map<String, Post>> findByFollower(@Param("fid") int fid, Pageable pageable);
 
 }

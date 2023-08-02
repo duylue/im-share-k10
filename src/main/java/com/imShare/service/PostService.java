@@ -14,7 +14,7 @@ public interface PostService {
 
     ResponseEntity<?> deletePost(int postId);
 
-    ResponseEntity<?> listPostUserName(String userName, int page, int size);
+    ResponseEntity<?> listPostUserId(int userId, int page, int size);
 
     ResponseEntity<?> listPostSave(int saveId, int page, int size);
 

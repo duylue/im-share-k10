@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -18,7 +20,9 @@ public class UserLike {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(name = "users_like",
+            joinColumns={@JoinColumn(name="like_id", referencedColumnName="likeId")},
+            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")})
+    private List<User> users;
 }

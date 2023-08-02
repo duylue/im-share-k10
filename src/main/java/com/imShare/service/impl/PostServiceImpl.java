@@ -41,9 +41,9 @@ public class PostServiceImpl extends BaseResponse implements PostService {
     PostPagingRepository postPagingRepository;
 
     @Override
-    public ResponseEntity listPostUserName(String userName, int page, int size) {
+    public ResponseEntity listPostUserId(int userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return getResponseEntity(postPagingRepository.findByUserName(userName, pageable));
+        return getResponseEntity(postPagingRepository.findByUserId(userId, pageable));
     }
 
     @Override
