@@ -53,4 +53,30 @@ public class UserServiceImpl extends BaseResponse implements UserService {
         return getResponseEntity(userRepository.findByUserName(username));
     }
 
+    @Override
+    public ResponseEntity<?> editProfile(String username, Profile profile) {
+        User user = userRepository.findByUserName(username);
+        Profile uProfile = user.getProfile();
+        uProfile.setProfilePhoto(profile.getProfilePhoto());
+        uProfile.setName(profile.getName());
+        uProfile.setBio(profile.getBio());
+        uProfile.setBirthday(profile.getBirthday());
+        uProfile.setGender(profile.getGender());
+        userRepository.save(user);
+        return getResponseEntity("Lưu thành công");
+    }
+
+    @Override
+    public ResponseEntity<?> changePass(String username,String oldpassword, String password) {
+        User user = userRepository.findByUserName(username);
+        if (passwordEncoder.matches(oldpassword, user.getPassword())){
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+            return getResponseEntity("Đổi thành công");
+        } else {
+            return getResponseEntity("Mật khẩu không đúng");
+        }
+    }
+
+
 }

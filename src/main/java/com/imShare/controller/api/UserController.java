@@ -1,5 +1,6 @@
 package com.imShare.controller.api;
 
+import com.imShare.model.Profile;
 import com.imShare.model.User;
 import com.imShare.service.UserService;
 import jakarta.annotation.security.PermitAll;
@@ -17,6 +18,16 @@ public class UserController {
     @GetMapping("/find-by-username")
     ResponseEntity<?> findByUsername(@RequestParam String uname){
         return userService.findByUsername(uname);
+    }
+    @PostMapping("/edit-profile")
+    ResponseEntity<?> editProfile(@RequestParam String uname, @RequestBody Profile profile){
+        return userService.editProfile(uname, profile);
+    }
+    @PostMapping("/change-password")
+    ResponseEntity<?> changePassword(@RequestParam String uname,
+                                     @RequestParam String opass,
+                                     @RequestParam String npass){
+        return userService.changePass(uname,opass,npass);
     }
 
 }

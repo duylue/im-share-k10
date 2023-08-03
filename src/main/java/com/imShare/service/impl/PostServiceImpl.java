@@ -1,9 +1,13 @@
 package com.imShare.service.impl;
 
 import com.imShare.exception.BusinessException;
+import com.imShare.model.Comment;
 import com.imShare.model.Post;
+import com.imShare.model.PostLike;
+import com.imShare.model.User;
 import com.imShare.repository.PostPagingRepository;
 import com.imShare.repository.PostRepository;
+import com.imShare.repository.UserRepository;
 import com.imShare.response.BaseResponse;
 import com.imShare.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,43 +26,23 @@ import java.util.Optional;
 public class PostServiceImpl extends BaseResponse implements PostService {
     @Autowired
     private PostRepository postRepository;
-
-    @Override
-    public ResponseEntity findAll() {
-        return getResponseEntity(postRepository.findAll());
-    }
-
-    @Override
-    public ResponseEntity savePost(Post post) {
-        return getResponseEntity(postRepository.save(post));
-    }
-
-
-    @Override
-    public ResponseEntity deletePost(int postId) {
-        postRepository.deleteById(postId);
-        return getResponseEntity("Xoa Thanh Cong");
-    }
-
     @Autowired
-    PostPagingRepository postPagingRepository;
-
-    @Override
-    public ResponseEntity listPostUserName(String userName, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return getResponseEntity(postPagingRepository.findByUserName(userName, pageable));
-    }
-
-    @Override
-    public ResponseEntity listPostSave(int saveId, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return getResponseEntity(postPagingRepository.findBySave(saveId, pageable));
-    }
+    private UserRepository userRepository;
 
 
     @Override
-    public ResponseEntity listPostFollower(int fid, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return getResponseEntity(postPagingRepository.findByFollower(fid, pageable));
+    public ResponseEntity<?> createPost(String username, Post post) {
+        User user = userRepository.findByUserName(username);
+        List<Comment> comments = new ArrayList<>();
+        post.setComments(comments);
+        PostLike postLike = new PostLike();
+        post.setPostLike(postLike);
+        List<Post> posts = user.getPosts();
+        posts.add(post);
+        user.setPosts(posts);
+        post.setUser(user);
+        postRepository.save(post);
+        userRepository.save(user);
+        return getResponseEntity("Tạo thành công");
     }
 }

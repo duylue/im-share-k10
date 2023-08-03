@@ -19,7 +19,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(value = {"saves", "user","postLike","comments"})
+@JsonIgnoreProperties(value = {"saves","user","postLike","comments"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +28,12 @@ public class Post {
     private String caption;
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate pdate = LocalDate.now();
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
     private List<Comment> comments;
-    @OneToOne(mappedBy = "post")
+    @OneToOne(mappedBy = "post",cascade = CascadeType.ALL)
     private PostLike postLike;
     @ManyToMany(mappedBy = "posts")
     private List<Save> saves;

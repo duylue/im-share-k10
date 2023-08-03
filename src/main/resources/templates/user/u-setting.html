@@ -35,7 +35,7 @@
             </div>
             <div>
                 <div class="btn-group-vertical w-100">
-                    <button type="button" class="btn btn-light  btn-block text-center text-lg-start py-3">
+                    <button type="button" onclick="goHome()" class="btn btn-light  btn-block text-center text-lg-start py-3">
                         <i class="fa-solid fa-house"></i><span
                             class="h4 ms-4 d-none d-lg-inline"><small>Home</small></span>
                     </button>
@@ -65,7 +65,7 @@
                     <hr class="dropdown-divider">
                     </hr>
                 </li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
         </div>
 
@@ -101,69 +101,33 @@
                         <div class="m-4">
                             <h4>Edit Profile</h4>
                         </div>
+                        <div>
+                            <input id="profilePhoto" hidden>
+                        </div>
 
-                        <form>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                         class="rounded-circle" alt="Cinque Terre" width="38" height="38">
+                        <div class="d-flex justify-content-center row mb-4">
+                                <div class="col-2 profileimg">
+
                                 </div>
                                 <div class="col-8 d-flex flex-column">
-                                    <div><span>phantu</span></div>
+                                    <div><span th:text="${#authentication.principal.username}"></span></div>
                                     <div><div type="button" class="text-primary" onclick="showuploadphoto()">Change profile photo</div></div>
                                     <div id="viewuploadphoto">
-<!--                                        <form id="uploadPhoto" enctype="multipart/form-data">-->
                                             <div class="mb-3">
-                                                <input type="file" class="form-control" name="files"
+                                                <form id="uploadPhoto" enctype="multipart/form-data">
+                                                    <input type="file" class="form-control" name="files"
                                                        multiple="multiple">
+                                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                                </form>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Upload</button>
-<!--                                        </form>-->
+
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <label for="fullname" class="form-label">Full Name </label>
-                                </div>
-                                <div class="col-8">
-                                    <input class="form-control" id="fullname" name="fullname"></input>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <label for="birthday" class="form-label">Birthday </label>
-                                </div>
-                                <div class="col-8">
-                                    <input type="date" class="form-control" id="birthday" name="birthday"></input>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <label for="bio" class="form-label">Bio: </label>
-                                </div>
-                                <div class="col-8">
-                                    <textarea class="form-control" rows="5" id="bio" name="text"></textarea>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <label for="gender" class="form-label">Gender:</label>
-                                </div>
-                                <div class="col-8">
-                                    <select class="form-select" id="gender">
-                                        <option>Custom</option>
-                                        <option>Female</option>
-                                        <option>Male</option>
-                                        <option>Prefer not to say</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="mt-5 btn btn-primary">Submit</button>
-                            </div>
+                        <div id="editprofilef">
 
-
-                        </form>
+                        </div>
                     </div>
 
                     <!-- Change password -->
@@ -172,23 +136,14 @@
                             <h4>Change password</h4>
                         </div>
 
-                        <form action="/action_page.php">
+
                             <div class="d-flex justify-content-center row mb-4">
                                 <div class="col-2">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                         class="rounded-circle" alt="Cinque Terre" width="38" height="38">
-                                </div>
-                                <div class="col-8 d-flex flex-column">
-                                    <div><span>Phantu202</span></div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center row mb-4">
-                                <div class="col-2">
-                                    <label for="oldpassword" class="form-label">Old password: </label>
+                                    <label for="password" class="form-label">Password: </label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="password" id="oldpassword" class="form-control"
-                                           placeholder="Enter old password" name="pswd">
+                                    <input type="password" id="password" class="form-control"
+                                           placeholder="Enter password" name="password">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center row mb-4">
@@ -197,7 +152,7 @@
                                 </div>
                                 <div class="col-8">
                                     <input type="password" id="newpassword" class="form-control"
-                                           placeholder="Enter new password" name="pswd">
+                                           placeholder="Enter new password" name="newpass">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center row mb-4">
@@ -206,17 +161,15 @@
                                 </div>
                                 <div class="col-8">
                                     <input type="password" id="newpassword2" class="form-control"
-                                           placeholder="Enter new password" name="pswd">
+                                           placeholder="Repeate new password" name="newpass2">
                                 </div>
-                                <button type="submit" class="mt-5 btn btn-primary">Submit</button>
+                                <button type="submit" class="mt-5 btn btn-primary" onclick="submitPassword()">Submit</button>
                             </div>
 
-
-                        </form>
                     </div>
 
 
-                    </form>
+
                 </div>
 
 
@@ -277,12 +230,12 @@
                     <div class="col-6 d-flex flex-column">
 
                         <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
-                            <div>
-                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                     class="rounded-circle" alt="Cinque Terre" width="56" height="56">
+                            <input type="text" id="contentpost" hidden>
+                            <div class="profileimg">
+
                             </div>
 
-                            <div><span class="h5">phantu202</span></div>
+                            <div><span class="h5" th:text="${#authentication.principal.username}"></span></div>
 
                         </div>
 
@@ -294,7 +247,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đăng bài</button>
+                    <button type="button" class="btn btn-danger" onclick="savePost()" data-bs-dismiss="modal">Đăng bài</button>
                 </div>
 
             </div>
@@ -309,6 +262,7 @@
     $(document).ready(function () {
         refreshPage()
         // Handle form submission
+        callProfile()
         $('#uploadForm').submit(function (event) {
             event.preventDefault();
 
@@ -326,7 +280,31 @@
                     let img = data[0].url
                     $('#uploadForm').hide()
                     initViewContent(img)
+                    $('#contentpost').val(img)
+                },
+                error: function (error) {
+                    alert('Error uploading file(s). Please try again later.');
+                    console.error(error);
+                }
+            });
 
+        });
+        $('#uploadPhoto').submit(function (event) {
+            event.preventDefault();
+            var formData = new FormData();
+            formData.append('attachments', this[0].files[0])
+            $.ajax({
+                type: 'POST',
+                url: API_URL + '/storages/attachments', // Replace with your API endpoint
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    let data = response.data
+                    let img = data[0].url
+                    alert('File(s) uploaded successfully!');
+                    $('#viewuploadphoto').hide()
+                    $('#profilePhoto').val(img)
                 },
                 error: function (error) {
                     alert('Error uploading file(s). Please try again later.');
@@ -336,7 +314,9 @@
 
         });
     });
-
+    function goHome(){
+        window.location.href = "http://localhost:8080/index"
+    }
     function initViewContent(img) {
         let view = $('.viewcontent')
         view.empty()
@@ -352,32 +332,154 @@
         $('#viewuploadphoto').show()
     }
     function refreshPage() {
+        callProfile()
         $('#uploadForm').show()
         $('#viewcontent').empty()
         $('#uploadfile').val('')
         $('#editprofile').show()
         $('#changepass').hide()
         $('#viewuploadphoto').hide()
+        $('#password').val('')
+        $('#newpassword').val('')
+        $('#newpassword2').val('')
+
 
     }
     function changePassWord(){
+        refreshPage()
         $('#editprofile').hide()
         $('#changepass').show()
     }
-
-    function showEditProfile(username){
+    function submitPassword(){
+        let username = $('#username').val()
+        let password = $('#password').val()
+        let newpassword = $('#newpassword').val()
+        let newpassword2 = $('#newpassword2').val()
+        if(newpassword == newpassword2){
+            $.ajax({
+                url: API_URL+'/u/change-password?uname='+username+'&opass='+password+'&npass='+newpassword,
+                method:'POST',
+                success:function (resp){
+                    let data = resp.data;
+                    alert(data)
+                }, error: function (error){
+                    console.log(error)
+                }
+            })
+        } else {
+            alert("nhắc lại mật khẩu không đúng")
+        }
+    }
+    function initFormEdit(data){
+        let view = $('#editprofilef')
+        view.empty()
+        var str =
+            '                        <form>\n' +
+            '                            <div class="d-flex justify-content-center row mb-4">\n' +
+            '                                <div class="col-2">\n' +
+            '                                    <label for="name" class="form-label">Full Name </label>\n' +
+            '                                </div>\n' +
+            '                                <div class="col-8">\n' +
+            '                                    <input class="form-control" id="name" value="'+data.profile.name+'" name="fullname"></input>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="d-flex justify-content-center row mb-4">\n' +
+            '                                <div class="col-2">\n' +
+            '                                    <label for="birthday" class="form-label">Birthday </label>\n' +
+            '                                </div>\n' +
+            '                                <div class="col-8">\n' +
+            '                                    <input type="date" class="form-control" id="birthday" value="'+data.profile.birthday+'" name="birthday"></input>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="d-flex justify-content-center row mb-4">\n' +
+            '                                <div class="col-2">\n' +
+            '                                    <label for="bio" class="form-label">Bio: </label>\n' +
+            '                                </div>\n' +
+            '                                <div class="col-8">\n' +
+            '                                    <textarea class="form-control" rows="5" id="bio" " name="bio">'+data.profile.bio+'</textarea>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="d-flex justify-content-center row mb-4">\n' +
+            '                                <div class="col-2">\n' +
+            '                                    <label for="gender" class="form-label">Gender:</label>\n' +
+            '                                </div>\n' +
+            '                                <div class="col-8">\n' +
+            '                                    <select class="form-select" id="gender">\n' +
+            '                                        <option>Custom</option>\n' +
+            '                                        <option>Female</option>\n' +
+            '                                        <option>Male</option>\n' +
+            '                                        <option>Prefer not to say</option>\n' +
+            '                                    </select>\n' +
+            '                                </div>\n' +
+            '                                <button type="submit" onclick="saveProfile()" class="mt-5 btn btn-primary">Submit</button>\n' +
+            '                            </div>\n' +
+            '\n' +
+            '\n' +
+            '                        </form>'
+    view.append(str)
+    }
+    function initProfileImg(data){
+        let view = $('.profileimg')
+        view.empty()
+        let str = '<img src="'+data.profile.profilePhoto+'"\n' +
+            '                                         class="rounded-circle" alt="Cinque Terre" width="38" height="38">'
+        view.append(str)
+    }
+    function callProfile(){
+        var username = $('#username').val()
         $.ajax({
             url: API_URL+'/u/find-by-username?uname='+username,
             method:'GET',
             success:function (resp){
-                let data = resp.data.content;
-
-
+                let data = resp.data;
+                initFormEdit(data)
+                initProfileImg(data)
+                $('#profilePhoto').val(data.profile.profilePhoto)
             }, error: function (error){
                 console.log(error)
             }
         })
     }
+    function saveProfile(){
+        let username = $('#username').val()
+        let data = {};
+        data.profilePhoto = $('#profilePhoto').val();
+        data.name = $('#name').val();
+        data.bio = $('#bio').val();
+        data.birthday = $('#birthday').val();
+        data.gender = $('#gender').val();
+            $.ajax({
+                url: API_URL+'/u/edit-profile?uname='+username,
+                method:'POST',
+                data:JSON.stringify(data),
+                contentType: 'application/json',
+                success:function (resp){
+                    refreshPage()
+                }, error: function (error){
+                    console.log(error)
+                }
+            })
+    }
+    function savePost(){
+        let username = $('#username').val()
+        let data={}
+        data.content = $('#contentpost').val()
+        data.caption = $('#caption').val()
+        $.ajax({
+            url: API_URL+'/post/create?uname='+username,
+            method:'POST',
+            data:JSON.stringify(data),
+            contentType: 'application/json',
+            success:function (resp){
+                alert('Đăng thành công')
+                goHome()
+            }, error: function (error){
+                alert('Đăng thất bại')
+            }
+        })
+
+    }
+
 
 
 </script>

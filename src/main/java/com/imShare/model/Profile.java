@@ -24,7 +24,7 @@ public class Profile {
     private int pid;
     private String name = "Unidentified person";
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
     private String gender;

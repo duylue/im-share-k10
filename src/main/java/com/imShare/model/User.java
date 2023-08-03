@@ -16,32 +16,35 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(value = {"roles","followings","postLikes","follower"})
+@JsonIgnoreProperties(value = {"roles", "followings", "postLikes", "follower"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     private String userName;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")},
-            inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="roleId")})
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "roleId")})
     private List<Role> roles;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="user_follower",
-            joinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")},
-            inverseJoinColumns={@JoinColumn(name="fid", referencedColumnName="fid")})
+            name = "user_follower",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")},
+            inverseJoinColumns = {@JoinColumn(name = "fid", referencedColumnName = "fid")})
+
     private List<Follower> followings;
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="user_postlike",
-            joinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")},
-            inverseJoinColumns={@JoinColumn(name="post_like_id", referencedColumnName="postLikeId")}
+            name = "user_postlike",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userId")},
+            inverseJoinColumns = {@JoinColumn(name = "post_like_id", referencedColumnName = "postLikeId")}
     )
     private List<PostLike> postLikes;
     @OneToOne(cascade = CascadeType.ALL)

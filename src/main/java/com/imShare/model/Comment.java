@@ -28,7 +28,7 @@ public class Comment {
     private String content;
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate cdate = LocalDate.now();
     @ManyToOne
