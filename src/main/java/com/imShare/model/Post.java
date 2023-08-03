@@ -1,6 +1,8 @@
 package com.imShare.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,6 +19,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"saves", "user","postLike","comments"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +30,11 @@ public class Post {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd-MM-yyyy")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date pdate;
+    private LocalDate pdate = LocalDate.now();
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
     private List<Comment> comments;
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<UserLike> likes;
+    @OneToOne(mappedBy = "post")
+    private PostLike postLike;
     @ManyToMany(mappedBy = "posts")
     private List<Save> saves;
     @ManyToOne

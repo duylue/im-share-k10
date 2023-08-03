@@ -1,6 +1,6 @@
 package com.imShare.service.impl;
 
-import com.imShare.model.UserLike;
+import com.imShare.model.PostLike;
 import com.imShare.repository.LikeRepository;
 import com.imShare.response.BaseResponse;
 import com.imShare.service.LikeService;
@@ -14,8 +14,8 @@ public class LikeServiceImpl extends BaseResponse implements LikeService {
 private LikeRepository likeRepository;
 
     @Override
-    public ResponseEntity createLike(UserLike userLike) {
-        return getResponseEntity(likeRepository.save(userLike));
+    public ResponseEntity createLike(PostLike postLike) {
+        return getResponseEntity(likeRepository.save(postLike));
     }
 
     @Override

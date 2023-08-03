@@ -12,6 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post,Integer>  {
+public interface PostRepository extends JpaRepository<Post,Integer> {
 
 }

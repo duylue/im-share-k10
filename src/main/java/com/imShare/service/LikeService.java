@@ -1,10 +1,10 @@
 package com.imShare.service;
 
-import com.imShare.model.UserLike;
+import com.imShare.model.PostLike;
 import org.springframework.http.ResponseEntity;
 
 public interface LikeService {
-    ResponseEntity createLike(UserLike userLike);
+    ResponseEntity createLike(PostLike postLike);
     ResponseEntity deleteLike(int likeId);
 
     ResponseEntity countLikes();

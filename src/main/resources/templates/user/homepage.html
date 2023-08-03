@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Dash Board</title>
@@ -22,6 +23,7 @@
 </head>
 
 <body>
+<input type="text" id="username" th:value="${#authentication.principal.username}" hidden>
 <div class="container-fluid row bg-light">
     <!-- SideBar -->
 
@@ -34,7 +36,7 @@
             </div>
             <div>
                 <div class="btn-group-vertical w-100">
-                    <button type="button" class="btn btn-light  btn-block text-center text-lg-start py-3">
+                    <button type="button" class="btn btn-light  btn-block text-center text-lg-start py-3" onclick="goHome()">
                         <i class="fa-solid fa-house"></i><span
                             class="h4 ms-4 d-none d-lg-inline"><small>Home</small></span>
                     </button>
@@ -58,7 +60,7 @@
                     class="fa-solid fa-caret-up"></i>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Setting</a></li>
+                <li><a class="dropdown-item" href="/user/setting">Setting</a></li>
                 <li><a class="dropdown-item" href="#">Save</a></li>
                 <li>
                     <hr class="dropdown-divider">
@@ -371,7 +373,7 @@
 
 
         </div>
-        <!-- Sidebar left -->
+        <!-- Sidebar right -->
         <div class="col-3 pt-4">
             <div class="d-flex justify-content-between mb-5">
                 <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
@@ -380,15 +382,14 @@
                              class="rounded-circle" alt="Cinque Terre" width="56" height="56">
                     </div>
 
-                    <div>
-                        <div><span class="h5">phantu202</span></div>
-                        <div><span class="h6">Phan Anh Tú</span></div>
+                    <div id="profile">
+
                     </div>
 
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                        <i class="fa-solid fa-ellipsis"></i>
+                        <a href="/logout" class="btn">Log out</a>
                     </button>
 
                 </div>
@@ -685,6 +686,7 @@
 <script>
     const API_URL = 'http://localhost:8080/api'
     $(document).ready(function () {
+        initProfile()
         // Handle form submission
         $('#uploadForm').submit(function (event) {
             event.preventDefault();
@@ -713,6 +715,9 @@
 
         });
     });
+    function goHome(){
+        window.location.href = "http://localhost:8080/index"
+    }
 
     function initViewContent(img) {
         let view = $('.viewcontent')
@@ -731,7 +736,13 @@
         $('#viewcontent').empty()
         $('#uploadfile').val('')
     }
-
+    function initProfile(){
+        let view = $('#profile')
+        view.empty()
+        let str ='<div><span class="h5">'+$('#username').val()+'</span></div>\n' +
+            '     <div><span class="h6">Phan Anh Tú</span></div>'
+        view.append(str)
+    }
 
 </script>
 

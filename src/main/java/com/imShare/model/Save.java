@@ -1,5 +1,7 @@
 package com.imShare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"user"})
 public class Save {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +24,9 @@ public class Save {
     @JoinTable(name = "post_save",
             joinColumns={@JoinColumn(name="save_id", referencedColumnName="saveId")},
             inverseJoinColumns={@JoinColumn(name="post_id", referencedColumnName="postId")})
+    @JsonIgnore
     private List<Post> posts;
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "save")
     private User user;
 
 }

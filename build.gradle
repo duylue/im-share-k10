@@ -31,10 +31,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.5.RELEASE'
 	implementation group: 'org.apache.tika', name: 'tika-core', version: '2.3.0'
-//	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-//	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.6.3'
-//	// https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc
-//	implementation group: 'org.springframework.session', name: 'spring-session-jdbc', version: '3.1.1'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 
 
 

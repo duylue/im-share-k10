@@ -1,5 +1,7 @@
 package com.imShare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,14 +15,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"users"})
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roleId;
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name = "user_role",
-            joinColumns={@JoinColumn(name="role_id", referencedColumnName="roleId")},
-            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="userId")})
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 }
