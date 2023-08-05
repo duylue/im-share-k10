@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"post"})
 public class PostLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

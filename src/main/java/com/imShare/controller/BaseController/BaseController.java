@@ -24,8 +24,8 @@ public class BaseController {
         return new ModelAndView("user/homepage");
     }
     @GetMapping("/user")
-    public ModelAndView user(Model model, @RequestParam("id") int uviewid){
-        model.addAttribute("uviewid", uviewid);
+    public ModelAndView user(Model model, @RequestParam("uname") String uname){
+        model.addAttribute("uname", uname);
         return new ModelAndView("/user/userpage");
     }
     @GetMapping("/user/setting")

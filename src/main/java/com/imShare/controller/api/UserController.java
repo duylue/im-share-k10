@@ -29,5 +29,21 @@ public class UserController {
                                      @RequestParam String npass){
         return userService.changePass(uname,opass,npass);
     }
+    @GetMapping("get-following-by-uname")
+    ResponseEntity<?> getFollowingByUsername(@RequestParam String uname,@RequestParam int page, @RequestParam int size){
+        return userService.getFollowingByUsername(uname,page,size);
+    }
+    @GetMapping("/following")
+    ResponseEntity<?> following (@RequestParam String u, @RequestParam String uf){
+        return userService.following(u, uf);
+    }
+    @GetMapping("/unfollow")
+    ResponseEntity<?> unfollow (@RequestParam String u, @RequestParam String uf){
+        return userService.unfollow(u, uf);
+    }
+    @GetMapping("/get-user-not-follow")
+    ResponseEntity<?> getUserNotFollow (@RequestParam String uname){
+        return userService.getUserNotFollow(uname);
+    }
 
 }
