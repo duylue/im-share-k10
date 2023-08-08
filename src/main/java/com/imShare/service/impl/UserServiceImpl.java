@@ -2,10 +2,7 @@ package com.imShare.service.impl;
 
 import com.imShare.exception.BusinessException;
 import com.imShare.model.*;
-import com.imShare.repository.FollowerRepository;
-import com.imShare.repository.RoleRepository;
-import com.imShare.repository.UserPagingRepository;
-import com.imShare.repository.UserRepository;
+import com.imShare.repository.*;
 import com.imShare.response.BaseResponse;
 import com.imShare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,8 @@ public class UserServiceImpl extends BaseResponse implements UserService {
     private RoleRepository roleRepository;
     @Autowired
     private FollowerRepository followerRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public void addUser(User user) {
@@ -48,6 +47,8 @@ public class UserServiceImpl extends BaseResponse implements UserService {
         save.setUser(user);
         List<Post> posts = new ArrayList<>();
         user.setPosts(posts);
+        List<Comment> comments = new ArrayList<>();
+        user.setComments(comments);
         Profile profile = new Profile();
         user.setProfile(profile);
         profile.setUser(user);
@@ -125,7 +126,7 @@ public class UserServiceImpl extends BaseResponse implements UserService {
         List<Follower> fullList = followerRepository.findAll();
         List<Follower> following = user.getFollowings();
         fullList.removeAll(following);
-        List users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         for (Follower f:fullList
              ) { users.add(f.getUser());
 

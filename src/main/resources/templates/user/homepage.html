@@ -16,9 +16,6 @@
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 </head>
 
@@ -99,7 +96,7 @@
             </div>
 
             <!-- List post folower -->
-            <div class="d-flex align-items-center justify-content-center px-2">
+            <div class="d-flex flex-column align-items-center justify-content-center px-2" id="listpostfollow">
                 <div class="border-bottom" style="height: auto; width: 470px;">
                     <div style="height: 58px;" class="d-flex justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
@@ -134,16 +131,18 @@
 
                     </div>
 
-                    <div type="button" data-bs-toggle="modal" data-bs-target="#post">
+                    <div type="button" onclick="showPost(11)" data-bs-toggle="modal" data-bs-target="#postview">
                         <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
                              class="rounded-circle" alt="Cinque Terre" width="470" height="585">
                     </div>
 
                     <div style="height: 50px;" class="d-flex justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
-                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                                <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
-                                    class="fa-regular fa-heart fa-lg"></i>
+                            <button type="button" onclick="clicklike(pid)" class="btn btn-light btn-block text-center text-lg-start py-3">
+                                <div class="viewlike-pid">
+                                    <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
+                                        class="fa-regular fa-heart fa-lg"></i>
+                                </div>
                             </button>
                             <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3"
                                     data-bs-toggle="modal" data-bs-target="#post">
@@ -151,15 +150,17 @@
                             </button>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <button type="button" class="btn btn-light btn-block text-center text-lg-start py-3">
-                                <i class="fa-solid fa-bookmark fa-lg"></i><i
-                                    class="fa-regular fa-bookmark fa-lg"></i>
+                            <button type="button" onclick="clicksave(pid)" class="btn btn-light btn-block text-center text-lg-start py-3">
+                                <div class="viewsave-pid">
+                                    <i class="fa-solid fa-bookmark fa-lg"></i><i
+                                        class="fa-regular fa-bookmark fa-lg"></i>
+                                </div>
                             </button>
                         </div>
 
 
                     </div>
-                    <div>
+                    <div class="countlike-pid">
                         <p class="h6 px-2">8 likes</p>
                     </div>
                     <div>
@@ -169,19 +170,19 @@
                         <p class="px-2">caption fjldfjldkfd</p>
                     </div>
                     <div class="mb-3">
-                        <form action="">
+                        <div>
                             <div class="row">
                                 <div class="col-11">
-                                    <label for="comment" class="form-label" hidden></label>
+                                    <label  class="form-label" hidden></label>
                                     <input type="text" class="form-control"
                                            placeholder="Add a comment..." name="comment">
                                 </div>
                                 <div class="col-1">
-                                    <button type="submit" class="btn btn-primary">Post</button>
+                                    <button type="button" onclick="createCmt(pid)" class="btn btn-primary">Post</button>
                                 </div>
                             </div>
 
-                        </form>
+                        </div>
 
                     </div>
 
@@ -225,7 +226,7 @@
         </div>
 
 
-        <!-- The Modal Create Post -->
+        <!-- The Modal Create -->
         <div class="modal fade" id="createPost">
             <div class="modal-dialog">
                 <div class="modal-content width-50 height-50">
@@ -251,16 +252,13 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal"
-                                data-bs-target="#editPost">Tiếp tục
-                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#editPost">Tiếp tục</button>
                     </div>
 
                 </div>
             </div>
         </div>
-
-        <!-- The Modal edit Post-->
+        <!-- The Modal edit -->
         <div class="modal fade" id="editPost">
             <div class="modal-dialog">
                 <div class="modal-content width-50 height-50">
@@ -278,6 +276,7 @@
                         <div class="col-6 d-flex flex-column">
 
                             <div class="d-flex align-items-center justify-content-center" style="height: 58px;">
+                                <input type="text" id="contentpost" hidden>
                                 <div class="profileimg">
 
                                 </div>
@@ -288,14 +287,13 @@
 
                             <div class="mb-3">
                                 <label for="caption" class="form-label" hidden></label>
-                                <textarea class="form-control" name="" id="caption" rows="4"
-                                          placeholder="Write a caption"></textarea>
+                                <textarea class="form-control" name="" id="caption" rows="4" placeholder="Write a caption"></textarea>
                             </div>
                         </div>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đăng bài</button>
+                        <button type="button" class="btn btn-danger" onclick="savePost()" data-bs-dismiss="modal">Đăng bài</button>
                     </div>
 
                 </div>
@@ -305,113 +303,13 @@
     </div>
 
     <!-- The Modal Post -->
-    <div class="modal fade min-vh-100 min-vw-100 bg-dark" id="post">
+    <div class="modal fade min-vh-100 min-vw-100 bg-dark" id="postview">
         <div class="modal-dialog min-vh-100" style="min-height: 90vh; min-width: 80vw;">
             <div class="modal-content" style="min-height: 90vh; min-width: 80vw;">
 
                 <!-- Modal body -->
-                <div class="row modal-body">
-                    <div class="col-6 d-flex align-items-center justify-content-center viewcontent">
-                        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                             class="img-fluid">
-                    </div>
-                    <div class="col-6 d-flex flex-column">
+                <div class="row modal-body" id="post">
 
-                        <div style="height: 40px;" class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <div>
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">
-                                </div>
-
-                                <div>
-                                    <div><span class="h6">Phantu202</span></div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <div class="dropdown">
-                                    <button type="submit"
-                                            class="btn btn-light btn-block text-center text-lg-start py-0"
-                                            data-bs-toggle="dropdown">
-                                        <i class="fa-solid fa-ellipsis"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Report</a></li>
-                                        <li><a class="dropdown-item" href="#">Unfollow</a></li>
-                                        <li><a class="dropdown-item" href="#">Add to favvorites</a></li>
-                                        <li><a class="dropdown-item" href="#">Go to post</a></li>
-
-                                    </ul>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                        <div class="d-flex flex-column justify-content-start border-top" style="min-height: 60vh;">
-                            <div class="row">
-                                <div class="col-1">
-                                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg"
-                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">
-
-                                </div>
-                                <div class="col-11 d-flex flex-column">
-                                    <div class="p-0 m-0">
-                                        <span class="h6">Phantu202</span>
-                                        <p>yall sound so stupid nd fake “woke” talkin about the vaccine, grown ass
-                                            ppl shi is ridiculous</p>
-                                    </div>
-                                    <div class="p-0 m-0">20/10/2023</div>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <div class="d-flex justify-content-between border-top" style="min-height: 10vh;">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <button type="button"
-                                        class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i><i
-                                        class="fa-regular fa-heart fa-lg"></i>
-                                </button>
-                                <button type="button"
-                                        class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-regular fa-comment fa-lg"></i>
-                                </button>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <button type="button"
-                                        class="btn btn-light btn-block text-center text-lg-start py-3">
-                                    <i class="fa-solid fa-bookmark fa-lg"></i><i
-                                        class="fa-regular fa-bookmark fa-lg"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="h6 px-2">8 likes</p>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center" style="min-height: 10vh;">
-                            <div class="w-100">
-                                <form action="">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <label for="comment" class="form-label" hidden></label>
-                                            <input type="text" class="form-control" id="comment"
-                                                   placeholder="Add a comment..." name="comment">
-                                        </div>
-                                        <div class="col-1">
-                                            <button type="submit" class="btn btn-primary">Post</button>
-                                        </div>
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -438,6 +336,7 @@
     const API_URL = 'http://localhost:8080/api'
     $(document).ready(function () {
         refreshPage()
+        getListPostFollow()
         callProfile()
         getListFollowing()
         $('#profile').click(function (){
@@ -463,7 +362,7 @@
                     let img = data[0].url
                     $('#uploadForm').hide()
                     initViewContent(img)
-
+                    $('#contentpost').val(img)
                 },
                 error: function (error) {
                     alert('Error uploading file(s). Please try again later.');
@@ -660,6 +559,433 @@
         })
 
     }
+    function savePost(){
+        let username = $('#username').val()
+        let data={}
+        data.content = $('#contentpost').val()
+        data.caption = $('#caption').val()
+        $.ajax({
+            url: API_URL+'/post/create?uname='+username,
+            method:'POST',
+            data:JSON.stringify(data),
+            contentType: 'application/json',
+            success:function (resp){
+                alert('Đăng thành công')
+                goHome()
+            }, error: function (error){
+                alert('Đăng thất bại')
+            }
+        })
+
+    }
+    function showPost(pid){
+
+        $.ajax({
+            url: API_URL+'/post/get?pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                initPost(data)
+                initViewLike(pid)
+                initViewSave(pid)
+                initCountLike(pid)
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+    }
+    function initPost(data){
+       let view = $('#post')
+        view.empty()
+        let str=''
+        str+='<div class="col-6 d-flex align-items-center justify-content-center">\n' +
+            '                        <img src="'+data.content+'"\n' +
+            '                             class="img-fluid">\n' +
+            '                    </div>\n' +
+            '                    <div class="col-6 d-flex flex-column">\n' +
+            '\n' +
+            '                        <div style="height: 40px;" class="d-flex justify-content-between pb-3">\n' +
+            '                            <div class="d-flex align-items-center justify-content-center">\n' +
+            '                                <div>\n' +
+            '                                    <img src="'+data.user.profile.profilePhoto+'"\n' +
+            '                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">\n' +
+            '                                </div>\n' +
+            '\n' +
+            '                                <div>\n' +
+            '                                    <div><span class="h6">'+data.user.userName+'</span></div>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="d-flex align-items-center justify-content-center">\n' +
+            '                                <div class="dropdown">\n' +
+            '                                    <button type="submit"\n' +
+            '                                            class="btn btn-light btn-block text-center text-lg-start py-0"\n' +
+            '                                            data-bs-toggle="dropdown">\n' +
+            '                                        <i class="fa-solid fa-ellipsis"></i>\n' +
+            '                                    </button>\n' +
+            '                                    <ul class="dropdown-menu">\n' +
+            '                                        <li><a class="dropdown-item" href="#">Report</a></li>\n' +
+            '                                        <li><a class="dropdown-item" href="#">Unfollow</a></li>\n' +
+            '                                        <li><a class="dropdown-item" href="#">Add to favvorites</a></li>\n' +
+            '                                        <li><a class="dropdown-item" href="#">Go to post</a></li>\n' +
+            '                                    </ul>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n'+
+            '                        <div class="d-flex flex-column justify-content-start border-top" style="height: 60vh; overflow-y: auto">'
+        for(let i = 0; i< data.comments.length; i++){
+            str+='                            <div class="row">\n' +
+                '                                <div class="col-1">\n' +
+                '                                    <img src="'+data.comments[i].user.profile.profilePhoto+'"\n' +
+                '                                         class="rounded-circle" alt="Cinque Terre" width="40" height="40">\n' +
+                '\n' +
+                '                                </div>\n' +
+                '                                <div class="col-11 d-flex flex-column">\n' +
+                '                                    <div class="p-0 m-0">\n' +
+                '                                        <span class="h6">'+data.comments[i].user.userName+'</span>\n' +
+                '                                        <p>'+data.comments[i].content+'</p>\n' +
+                '                                    </div>\n' +
+                '                                    <div class="p-0 m-0">'+data.comments[i].cdate+'</div>\n' +
+                '                                </div>\n'+
+            '                            </div>\n'
+        }
+
+        str +=
+            '                        </div>\n' +
+            '\n' +
+            '                        <div class="d-flex justify-content-between border-top" style="min-height: 10vh;">\n' +
+            '                            <div class="d-flex align-items-center justify-content-center">\n' +
+            '                                <button type="button" onclick="clicklike(\''+data.postId+'\')" \n' +
+            '                                        class="btn btn-light btn-block text-center text-lg-start py-3">\n' +
+            '                                    <div class="viewlike'+data.postId+'">\n' +
+            '                                    </div>\n' +
+            '\n' +
+            '                                </button>\n' +
+            '                                <button type="button"\n' +
+            '                                        class="btn btn-light btn-block text-center text-lg-start py-3">\n' +
+            '                                    <i class="fa-regular fa-comment fa-lg"></i>\n' +
+            '                                </button>\n' +
+            '                            </div>\n' +
+            '                            <div class="d-flex align-items-center justify-content-center">\n' +
+            '                                <button type="button" onclick="clicksave(\''+data.postId+'\')" \n' +
+            '                                        class="btn btn-light btn-block text-center text-lg-start py-3">\n' +
+            '                                    <div class="viewsave'+data.postId+'">\n' +
+            '                                    </div>\n' +
+            '\n' +
+            '                                </button>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        <div class="countlike'+data.postId+'">\n' +
+            '                        </div>\n' +
+            '                        <div class="d-flex justify-content-center align-items-center" style="min-height: 10vh;">\n' +
+            '                            <div class="w-100">\n' +
+            '                                <div>\n' +
+            '                                    <div class="row">\n' +
+            '                                        <div class="col-10">\n' +
+            '                                            <label for="comment" class="form-label" hidden></label>\n' +
+            '                                            <input type="text" class="form-control" id="comment'+data.postId+'"\n' +
+            '                                                   placeholder="Add a comment...">\n' +
+            '                                        </div>\n' +
+            '                                        <div class="col-1">\n' +
+            '                                            <button type="button" onclick="createCmt(\''+data.postId+'\')" class="btn btn-primary">Post</button>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '\n' +
+            '                                </div>\n' +
+            '\n' +
+            '                            </div>\n' +
+            '\n' +
+            '                        </div>\n' +
+            '                    </div>'
+        view.append(str)
+    }
+    function initViewLike(pid){
+        let username = $('#username').val()
+        let view = $('.viewlike'+pid)
+        view.empty()
+        let str =''
+        $.ajax({
+            url: API_URL+'/post/check-like?uname='+username+'&pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                if(data){
+                    str+='<i class="fa-solid fa-heart fa-lg" style="color: #ff4013;"></i>'
+                } else {
+                    str+='<i class="fa-solid fa-heart fa-lg"></i>'
+                }
+                view.append(str)
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+
+    }
+    function initViewSave(pid){
+        let username = $('#username').val()
+        let view = $('.viewsave'+pid)
+        view.empty()
+        let str =''
+        $.ajax({
+            url: API_URL+'/post/check-save?uname='+username+'&pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                if(data){
+                    str+='<i class="fa-solid fa-bookmark fa-lg"></i>'
+                } else {
+                    str+='<i class="fa-regular fa-bookmark fa-lg"></i>'
+                }
+                view.append(str)
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+
+    }
+    function initCountLike(pid){
+        let view = $('.countlike'+pid)
+        view.empty()
+        let str =''
+        $.ajax({
+            url: API_URL+'/post/get?pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                str+='<p class="h6 px-2">'+data.postLike.users.length+' lượt like</p>'
+                view.append(str)
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+
+    }
+    function createCmt(pid){
+        let username = $('#username').val()
+        let data={}
+        let a = $('#commenta'+pid).val()
+        let b = $('#comment'+pid).val()
+        if(a != ''){
+            data.content = a
+        } else {data.content = b}
+
+        data.content = $('#comment'+pid).val()
+        $.ajax({
+            url: API_URL+'/post/create-comment?uname='+username+'&pid='+pid,
+            method:'POST',
+            data:JSON.stringify(data),
+            contentType: 'application/json',
+            success:function (resp){
+                alert('Comment thành công')
+                showPost(pid)
+            }, error: function (error){
+                alert('Comment thất bại')
+            }
+        })
+
+    }
+    function clicklike(pid){
+        let username = $('#username').val()
+        $.ajax({
+            url: API_URL+'/post/check-like?uname='+username+'&pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                if(data){
+                    $.ajax({
+                        url: API_URL+'/post/delete-like?uname='+username+'&pid='+pid,
+                        method:'GET',
+                        success:function (resp){
+
+                            initViewLike(pid)
+                            initCountLike(pid)
+                        },
+                        error: function (error){
+                            console.log(error)
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        url: API_URL+'/post/create-like?uname='+username+'&pid='+pid,
+                        method:'GET',
+                        success:function (resp){
+
+                            initViewLike(pid)
+                            initCountLike(pid)
+                        },
+                        error: function (error){
+                            console.log(error)
+                        }
+                    })
+                }
+
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+
+
+    }
+    function clicksave(pid){
+        let username = $('#username').val()
+        $.ajax({
+            url: API_URL+'/post/check-save?uname='+username+'&pid='+pid,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                if(data){
+                    $.ajax({
+                        url: API_URL+'/post/delete-save?uname='+username+'&pid='+pid,
+                        method:'GET',
+                        success:function (resp){
+
+                            initViewSave(pid)
+                        },
+                        error: function (error){
+                            console.log(error)
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        url: API_URL+'/post/create-save?uname='+username+'&pid='+pid,
+                        method:'GET',
+                        success:function (resp){
+
+                            initViewSave(pid)
+                        },
+                        error: function (error){
+                            console.log(error)
+                        }
+                    })
+                }
+
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+
+
+    }
+    function initViewListPostFollow(data){
+        let view = $('#listpostfollow')
+        view.empty()
+        let str=''
+        for(let i=0; i< data.length;i++){
+            str+='<div class="border-bottom" style="height: auto; width: 470px;">\n' +
+                '                    <div style="height: 58px;" class="d-flex justify-content-between">\n' +
+                '                        <div class="d-flex align-items-center justify-content-center" type="button" onclick="goUserPage(\''+data[i].user.userName+'\')">\n' +
+                '                            <div>\n' +
+                '                                <img src="'+data[i].user.profile.profilePhoto+'"\n' +
+                '                                     class="rounded-circle" alt="Cinque Terre" width="42" height="42">\n' +
+                '                            </div>\n' +
+                '\n' +
+                '                            <div>\n' +
+                '                                <div><span class="h5">'+data[i].user.userName+'</span></div>\n' +
+                '                            </div>\n' +
+                '                            <div class="d-flex justify-content-center"><span><small><i> - '+data[i].pdate+'</i></small></span></p>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                        <div class="d-flex align-items-center justify-content-center">\n' +
+                '                            <div class="dropdown">\n' +
+                '                                <button type="submit" class="btn btn-light btn-block text-center text-lg-start py-3"\n' +
+                '                                        data-bs-toggle="dropdown">\n' +
+                '                                    <i class="fa-solid fa-ellipsis"></i>\n' +
+                '                                </button>\n' +
+                '                                <ul class="dropdown-menu">\n' +
+                '                                    <li><div type="button" class="dropdown-item" >Report</div></li>\n' +
+                '                                    <li><div type="button" class="dropdown-item" onclick="unfollow(\'admin\',\'phantu\')" >Unfollow</div></li>\n' +
+                '                                    <li><div type="button" class="dropdown-item" >Add to favvorites</div></li>\n' +
+                '                                    <li><div type="button" class="dropdown-item" >Go to post</div></li>\n' +
+                '\n' +
+                '                                </ul>\n' +
+                '                            </div>\n' +
+                '\n' +
+                '\n' +
+                '                        </div>\n' +
+                '\n' +
+                '                    </div>\n' +
+                '\n' +
+                '                    <div type="button" onclick="showPost('+data[i].postId+')" data-bs-toggle="modal" data-bs-target="#postview">\n' +
+                '                        <img src="'+data[i].content+'"\n' +
+                '                             class="rounded-circle" alt="Cinque Terre" width="470" height="585">\n' +
+                '                    </div>\n' +
+                '\n' +
+                '                    <div style="height: 50px;" class="d-flex justify-content-between">\n' +
+                '                        <div class="d-flex align-items-center justify-content-center">\n' +
+                '                            <button type="button" onclick="clicklike('+data[i].postId+')" class="btn btn-light btn-block text-center text-lg-start py-3">\n' +
+                '                                <div class="viewlike'+data[i].postId+'">\n' +
+                '                                </div>\n' +
+                '                            </button>\n' +
+                '                            <button type="button" onclick="showPost('+data[i].postId+')" class="btn btn-light btn-block text-center text-lg-start py-3"\n' +
+                '                                    data-bs-toggle="modal" data-bs-target="#postview">\n' +
+                '                                <i class="fa-regular fa-comment fa-lg"></i>\n' +
+                '                            </button>\n' +
+                '                        </div>\n' +
+                '                        <div class="d-flex align-items-center justify-content-center">\n' +
+                '                            <button type="button" onclick="clicksave('+data[i].postId+')" class="btn btn-light btn-block text-center text-lg-start py-3">\n' +
+                '                                <div class="viewsave'+data[i].postId+'">\n' +
+                '                                </div>\n' +
+                '                            </button>\n' +
+                '                        </div>\n' +
+                '\n' +
+                '\n' +
+                '                    </div>\n' +
+                '                    <div class="countlike'+data[i].postId+'">\n' +
+                '                    </div>\n' +
+                '                    <div>\n' +
+                '                        <div class="px-2"><span class="h5">'+data[i].user.profile.name+'</span></div>\n' +
+                '                    </div>\n' +
+                '                    <div>\n' +
+                '                        <p class="px-2">'+data[i].caption+'</p>\n' +
+                '                    </div>\n' +
+                '                    <div class="mb-3">\n' +
+                '                        <div>\n' +
+                '                            <div class="row">\n' +
+                '                                <div class="col-11">\n' +
+                '                                    <label  class="form-label" hidden></label>\n' +
+                '                                    <input type="text" class="form-control" id="commenta'+data[i].postId+'"\n' +
+                '                                           placeholder="Add a comment...">\n' +
+                '                                </div>\n' +
+                '                                <div class="col-1">\n' +
+                '                                    <button type="button" onclick="createCmt('+data[i].postId+')" class="btn btn-primary">Post</button>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '\n' +
+                '                        </div>\n' +
+                '\n' +
+                '                    </div>\n' +
+                '\n' +
+                '\n' +
+                '                </div>'
+        }
+        view.append(str)
+
+    }
+    function getListPostFollow(){
+        let username = $('#username').val()
+        $.ajax({
+            url: API_URL+'/post/get-all-post-from-following?uname='+username,
+            method:'GET',
+            success:function (resp){
+                let data = resp.data
+                initViewListPostFollow(data)
+                for(let i = 0; i< data.length; i++){
+                    initViewLike(data[i].postId)
+                    initViewSave(data[i].postId)
+                    initCountLike(data[i].postId)
+                }
+            },
+            error: function (error){
+                console.log(error)
+            }
+        })
+    }
+
 </script>
 
 </body>

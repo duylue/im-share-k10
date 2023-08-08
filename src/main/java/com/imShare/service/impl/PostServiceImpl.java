@@ -27,6 +27,8 @@ public class PostServiceImpl extends BaseResponse implements PostService {
     private LikeRepository likeRepository;
     @Autowired
     private SaveRepository saveRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
 
     @Override
@@ -35,7 +37,10 @@ public class PostServiceImpl extends BaseResponse implements PostService {
         List<Comment> comments = new ArrayList<>();
         post.setComments(comments);
         PostLike postLike = new PostLike();
+        List<User> users = new ArrayList<>();
+        postLike.setUsers(users);
         post.setPostLike(postLike);
+        postLike.setPost(post);
         List<Post> posts = user.getPosts();
         posts.add(post);
         user.setPosts(posts);
@@ -130,6 +135,23 @@ public class PostServiceImpl extends BaseResponse implements PostService {
         post.getSaves().remove(save);
         saveRepository.save(save);
         return getResponseEntity("Delete thành công");
+    }
+
+    @Override
+    public ResponseEntity<?> createComment(String username, int postId, Comment comment) {
+        User user = userRepository.findByUserName(username);
+        Post post = postRepository.findByPostId(postId);
+        comment.setUser(user);
+        comment.setPost(post);
+        user.getComments().add(comment);
+        post.getComments().add(comment);
+        commentRepository.save(comment);
+        return getResponseEntity("Comment Thành Công");
+    }
+
+    @Override
+    public ResponseEntity<?> getPostByPostId(int postId) {
+        return getResponseEntity(postRepository.findByPostId(postId));
     }
 
 }

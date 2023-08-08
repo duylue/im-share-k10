@@ -1,5 +1,6 @@
 package com.imShare.service;
 
+import com.imShare.model.Comment;
 import com.imShare.model.Post;
 import com.imShare.response.Response;
 import org.springframework.http.ResponseEntity;
@@ -16,5 +17,6 @@ public interface PostService {
     ResponseEntity<?> checkSave  (String username, int postId);
     ResponseEntity<?> createSave  (String username, int postId);
     ResponseEntity<?> deleteSave  (String username, int postId);
-
+    ResponseEntity<?> createComment (String username, int postId, Comment comment);
+    ResponseEntity<?> getPostByPostId (int postId);
 }
